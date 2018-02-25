@@ -46,7 +46,10 @@ server.route([
     method: 'GET',
     path: '/api/v1/todolist/{index}',
     handler: function(request,reply) {
-      reply(todolist[request.params.index-1]);
+      var result = Task.findOne({"index":request.params.index});
+      result.exec(function(err, task){
+        reply(task);
+      })      
     }
   },
   {
