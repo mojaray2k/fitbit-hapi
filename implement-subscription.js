@@ -34,7 +34,7 @@ server.route([
     method: 'POST',
     path: '/api/v1/todolist',
     handler: function(request,reply) {
-      newTask = {"task":requst.payload.task, "owner":requst.payload.owner};
+      newTask = {"task":request.payload.task, "owner":request.payload.owner};
       todolist.push(newTask);
       reply(todolist).code(201);
     }
@@ -50,7 +50,7 @@ server.route([
     method: 'PUT',
     path: '/api/v1/todolist/{index}',
     handler: function(request,reply) {
-      newTask = {"task":requst.payload.task, "owner":requst.payload.owner};
+      newTask = {"task":request.payload.task, "owner":request.payload.owner};
       todolist[request.params.index-1] = newTask
       reply(todolist[request.params.index-1]);
     }
