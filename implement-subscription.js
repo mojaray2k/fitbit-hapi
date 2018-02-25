@@ -70,8 +70,9 @@ server.route([
     method: 'DELETE',
     path: '/api/v1/todolist/{index}',
     handler: function(request,reply) {
-      delete todolist[request.params.index-1];
-      reply().code(204);
+      Task.findOneAndRemove({index:request.params.index}, function(){
+        reply().code(204);
+      });      
     }
   }
 ])
