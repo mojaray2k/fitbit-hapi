@@ -1,16 +1,16 @@
 var Hapi = require('hapi');
+var mongoose = require('mongoose');
 
-// Create the data store for the test API
-var todolist = [
-  {
-      "task": "Walk the cat",
-      "owner": "Kirsten"
-  },
-  {
-      "task": "Water the plants",
-      "owner": "Kirsten"
-  }
-]
+mongoose.connect('mongodb://localhost/test');
+var db = mongoose.connection;
+
+var taskSchema = mongoose.Schema({
+        task: String,
+        owner: String,
+        index: Number
+});
+
+var Task = mongoose.model('Task', taskSchema)
 
 var server = new Hapi.Server();
 server.connection({ port: 8080  });
@@ -27,7 +27,10 @@ server.route([
     method: 'GET',
     path: '/api/v1/todolist',
     handler: function(request,reply) {
-      reply(todolist);
+      var result = Task.find();
+      result.exec(function(err, tasks){
+        reply(tasks);
+      });
     }
   },
   {
