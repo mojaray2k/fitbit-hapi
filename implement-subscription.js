@@ -27,7 +27,7 @@ server.route([
     method: 'GET',
     path: '/api/v1/todolist',
     handler: function(request,reply) {
-      var result = Task.find();
+      var result = Task.find().sort({index:-1}).limit(10);
       result.exec(function(err, tasks){
         reply(tasks);
       });
