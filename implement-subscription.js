@@ -48,7 +48,12 @@ server.route([
     handler: function(request,reply) {
       var result = Task.findOne({"index":request.params.index});
       result.exec(function(err, task){
-        reply(task);
+        if(task){
+          reply(task);
+        }else{
+          reply().code(404);
+        }
+        
       })      
     }
   },
