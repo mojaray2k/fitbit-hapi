@@ -37,9 +37,18 @@ server.route([
     method: 'POST',
     path: '/api/v1/todolist',
     handler: function(request,reply) {
-      newTask = {"task":request.payload.task, "owner":request.payload.owner};
-      todolist.push(newTask);
-      reply(todolist).code(201);
+      var lastest_task = Task.find().sort({'index':-1}).limit(1); 
+      lastest_task.exec(function(err, task){
+        new_index = task[0]["index"] + 1;
+        newTask = new Task({
+          "task": request.payload.task,
+          "owner": request.payload.owner,
+          "index": new_index
+        })
+        newTask.save(function(err, newTask){
+          reply(newTask).code(201)
+        })
+      });
     }
   },
   {
