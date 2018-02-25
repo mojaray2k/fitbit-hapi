@@ -70,9 +70,17 @@ server.route([
     method: 'PUT',
     path: '/api/v1/todolist/{index}',
     handler: function(request,reply) {
-      newTask = {"task":request.payload.task, "owner":request.payload.owner};
-      todolist[request.params.index-1] = newTask
-      reply(todolist[request.params.index-1]);
+      var updateData = {
+        "task": request.payload.task,
+        "owner": request.payload.owner,
+        "index": request.params.index
+      }
+      Task.findOneAndUpdate({'index':request.params.index},
+                              updateData,
+                              {new:true},
+                              function(err, doc){
+                                reply(doc);
+                              });
     }
   },
   {
