@@ -31,10 +31,36 @@ server.route([
     }
   },
   {
+    method: 'POST',
+    path: '/api/v1/todolist',
+    handler: function(request,reply) {
+      newTask = {"task":requst.payload.task, "owner":requst.payload.owner};
+      todolist.push(newTask);
+      reply(todolist).code(201);
+    }
+  },
+  {
     method: 'GET',
     path: '/api/v1/todolist/{index}',
     handler: function(request,reply) {
       reply(todolist[request.params.index-1]);
+    }
+  },
+  {
+    method: 'PUT',
+    path: '/api/v1/todolist/{index}',
+    handler: function(request,reply) {
+      newTask = {"task":requst.payload.task, "owner":requst.payload.owner};
+      todolist[request.params.index-1] = newTask
+      reply(todolist[request.params.index-1]);
+    }
+  },
+  {
+    method: 'DELETE',
+    path: '/api/v1/todolist/{index}',
+    handler: function(request,reply) {
+      delete todolist[request.params.index-1];
+      reply().code(204);
     }
   }
 ])
