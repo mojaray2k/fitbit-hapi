@@ -2,24 +2,24 @@
   "name": "fitbit-hapi",
   "version": "1.0.0",
   "description": "Example code demonstrating basic fitbit-node functionality with hapi",
-  "main": "implement-subscription.js",
+  "main": "fitbit.js",
   "author": "Amen Ra",
   "license": "ISC",
   "dependencies": {
     "hapi": "^11.0.0",
-    "mongoose":"^4.7",
-    "fitbit-node":"^2.0",
-    "q":"^1.4.1",
-    "crypto":"^0.0.3"
+    "mongoose": "^4.7",
+    "fitbit-node": "^2.0",
+    "q": "^1.4.1",
+    "crypto": "^0.0.3"
   },
   "engines": {
     "node": "^4.2.1"
   },
-  "repository":{
-    "type" : "git",
-    "url" : "https://github.com/mojaray2k/fitbit-hapi.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mojaray2k/fitbit-hapi.git"
   },
   "scripts": {
-    "start": "node implement-subscription.js"
-  } 
+    "start": "node fitbit.js"
+  }
 }
